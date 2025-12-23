@@ -2,7 +2,7 @@ name: Deploy Vite Site
 
 on:
   push:
-    branches: ["main"] # 如果你的分支名是 master，请改为 master
+    branches: ["main"] 
   workflow_dispatch:
 
 permissions:
@@ -25,7 +25,8 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-cache: 'pnpm'
+          node-version: 20
+          cache: 'pnpm' # 之前这里写错了，现在改成了正确的 cache
 
       - name: Install dependencies
         run: pnpm install
@@ -39,7 +40,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist' # Vite 默认打包到 dist 目录
+          path: './dist' 
 
   deploy:
     environment:
